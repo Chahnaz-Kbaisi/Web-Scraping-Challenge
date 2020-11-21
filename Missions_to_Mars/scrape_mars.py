@@ -68,3 +68,60 @@ def scrape():
 
     # Using Pandas to convert the data to a HTML table string:
     mars_facts = facts_df.to_html('table.html')
+
+    # Mars Hemispheres
+
+    # The URL page to be scraped using splinter:
+    url_hemispheres = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
+    browser.visit(url_hemispheres)
+
+    html = browser.html
+    # Creating BeautifulSoup object from the webpage:
+    soup_obj = BeautifulSoup(html, "html.parser")
+
+    items = soup_obj.find_all('div', class_="item")
+    hemisphere_title = soup_obj.find_all('div', class_="description")
+
+    # Use a Python dictionary to store the data using the keys img_url and title.
+    hemispheres_urls_dict = []
+
+    # Starting a loop to collect title and img_url:
+    items = soup_obj.find_all('div', class_="item")
+
+    # The main url for the webpage:
+    main_url = 'https://astrogeology.usgs.gov'
+
+    # Looping through for all the information:
+    for item in items:
+        # Locating & storing the titles:
+        title = item.find("h3").text
+        # print(title)
+
+        # Locating & storing the link
+        img_link = item.find("a", class_="itemLink product-item")["href"]
+        # print(img_link)
+
+        # Storing the url using browser:
+        browser.visit(main_url + img_link)
+
+        # HTML object:
+        img_link_html = browser.html
+
+        # Collecting full image url:
+        img_url = main_url + soup_obj.find('img', class_='thumb')['src']
+
+        hemispheres_urls_dict.append({"title": title, "img_url": img_url})
+
+        browser.quit()
+
+        # Storing the dataset into dictionary:
+
+        mars_database = {
+            "news_title": news_title,
+            "news_paragraph": news_parag,
+            "featured_image_url ":  featured_image_url,
+            "mars_facts": mars_facts,
+            "hemispheres_images_urls": hemispheres_urls_dict
+        }
+
+        return mars_database
