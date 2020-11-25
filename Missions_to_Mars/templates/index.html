@@ -41,8 +41,6 @@
                 <!-- </div> -->
             </div>
             <!-- Section 2: right - Table Mars Facts -->
-            <!-- <br> -->
-            <!-- <div class="row"> -->
             <div class="col-md-4">
                 <div class="boxborder">
                     <div class="panel-body">
@@ -53,13 +51,12 @@
                     </div>
                 </div>
             </div>
-            <!-- </div> -->
         </div>
         <hr>
         <!-- Hemispheres section -->
         <div class="row">
             <div class="col-md-8 offset-4">
-                <h4 class="align-items-center">Mars Hemispheres</h4>
+                <h4 class="align-items-center"><b>Mars Hemispheres</b></h4>
 
             </div>
         </div>
@@ -68,12 +65,11 @@
             {% for hem in mars_database.hemispheres_urls_dict %}
             <div class="col-6 border">
                 </br>
-                <div>
-                    <img width="512px" height="512px" src=" {{ hem.img_url | safe }} ">
-                </div>
-
-                <div>
-                    <h4> {{ hem.title }} </h4>
+                <div class="img-container">
+                    <img width="530px" height="530px" src=" {{ hem.img_url | safe }} ">
+                    <div class="caption">
+                        <h4> {{ hem.title }} </h4>
+                    </div>
                 </div>
             </div>
             {% endfor %}
