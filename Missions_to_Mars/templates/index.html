@@ -11,65 +11,76 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 
 <body>
-    <div class="jumbotron jumbotron-fluid text-center border-bottom">
-        <div class="container">
+    <div class="container">
+        <div class="jumbotron jumbotron-fluid text-center border-bottom">
             <h1 class="display-4">Mission to Mars</h1>
             <a class="btn btn-primary btn-lg" style="background-color: steelblue;" href="/scrape" role="button">Scrape
-                New
-                Data</a>
+                New Data</a>
         </div>
-    </div>
-    <!-- Mars News Section -->
-    <div class="row">
-        <div class="col-md-12">
-            <div class="media">
-                <div class="media-body">
-                    <h2><b>Latest Mars News</b></h2>
-                    <h3 class="heading">{{ mars_database.news_title }}</h3>
-                    <p> {{ mars_database.news_parag }} </p>
-                    <hr class="my-4">
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Section 2: left and right -->
-    <div class="row">
-        <!-- Section 1: Left - Image -->
-        <div class="col-md-8">
-            <h4><b>Featured Mars Image</b></h4>
-            <img src="{{ mars_database.featured_image_url }}" alt="Featured Mars Image" height=auto width=750px>
-        </div>
-        <!-- Section 2: right - Table Mars Facts -->
-        <br>
+
+        <!-- Mars News Section -->
         <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <h5>Mars Facts</h5>
-                        <p>
-                            {{ mars_database.facts_df | safe }}
-                        </p>
+            <div class="col-md-12">
+                <div class="media">
+                    <div class="media-body">
+                        <h2><b>Latest Mars News</b></h2>
+                        <h3 class="heading">{{ mars_database.news_title }}</h3>
+                        <p> {{ mars_database.news_parag }} </p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 offset-4">
-            <h4 class="align-items-center"><u>Mars Hemispheres</u></h4>
-            <hr>
+
+        <!-- Section 2: left and right -->
+        <div class="row">
+            <!-- Section 1: Left - Image -->
+            <!-- <div class="col-md-8"> -->
+            <div class="border">
+                <h4><b>Featured Mars Image</b></h4>
+                <img src="{{ mars_database.featured_image_url }}" alt="Featured Mars Image" height=auto width=750px>
+            </div>
+            <!-- </div> -->
+            <!-- Section 2: right - Table Mars Facts -->
+            <br>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="boxborder">
+                        <div class="panel-body">
+                            <h5>Mars Facts</h5>
+                            <!-- <p> -->
+                            {{ mars_database.facts_df | safe }}
+                            <!-- </p> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-6 border" style="padding: 30px;">
+        <hr>
+        <!-- Hemispheres section -->
+        <div class="row">
+            <div class="col-md-8 offset-4">
+                <h4 class="align-items-center"><u>Mars Hemispheres</u></h4>
+                <hr>
+            </div>
+        </div>
+        </br>
+        <div class="row">
             {% for hem in mars_database.hemispheres_urls_dict %}
-            <img width="100%" height="100%" src=" {{ hem.img_url }} ">
+            <div class="col-6 border">
+                </br>
+                <div>
+                    <img width="512px" height="512px" src=" {{ hem.img_url | safe }} ">
+                </div>
+
+                <div>
+                    <h4> {{ hem.title }} </h4>
+                </div>
+            </div>
+            {% endfor %}
         </div>
-        <div>
-            <h3> {{ hem.title }} </h3>
-        </div>
+
     </div>
-    {% endfor %}
+    <hr>
 </body>
 <!-- jQuery and JS separate / Popper.js -->
 <script src=" https://code.jquery.com/jquery-3.5.1.slim.min.js"
