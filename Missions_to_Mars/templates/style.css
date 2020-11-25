@@ -23,3 +23,9 @@ img {
     margin-right: auto;
     width: 40%;
 }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    padding: 5%;
+  }
