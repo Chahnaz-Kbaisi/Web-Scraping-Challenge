@@ -34,33 +34,33 @@
         <!-- Section 2: left and right -->
         <div class="row">
             <!-- Section 1: Left - Image -->
-            <!-- <div class="col-md-8"> -->
-            <div class="border">
+            <div class="col-md-8">
+                <!-- <div class="border"> -->
                 <h4><b>Featured Mars Image</b></h4>
                 <img src="{{ mars_database.featured_image_url }}" alt="Featured Mars Image" height=auto width=750px>
+                <!-- </div> -->
             </div>
-            <!-- </div> -->
             <!-- Section 2: right - Table Mars Facts -->
-            <br>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="boxborder">
-                        <div class="panel-body">
-                            <h5>Mars Facts</h5>
-                            <!-- <p> -->
-                            {{ mars_database.facts_df | safe }}
-                            <!-- </p> -->
-                        </div>
+            <!-- <br> -->
+            <!-- <div class="row"> -->
+            <div class="col-md-4">
+                <div class="boxborder">
+                    <div class="panel-body">
+                        <h5>Mars Facts</h5>
+                        <!-- <p> -->
+                        {{ mars_database.facts_df | safe }}
+                        <!-- </p> -->
                     </div>
                 </div>
             </div>
+            <!-- </div> -->
         </div>
         <hr>
         <!-- Hemispheres section -->
         <div class="row">
             <div class="col-md-8 offset-4">
-                <h4 class="align-items-center"><u>Mars Hemispheres</u></h4>
-                <hr>
+                <h4 class="align-items-center">Mars Hemispheres</h4>
+
             </div>
         </div>
         </br>
