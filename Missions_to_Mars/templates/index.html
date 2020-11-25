@@ -24,18 +24,21 @@
         <div class="col-md-12">
             <div class="media">
                 <div class="media-body">
-                    <h2>Latest Mars News</h2>
-                    <h3> {{ mars_database.news_title }}</h3>
+                    <h2><b>Latest Mars News</b></h2>
+                    <h3 class="heading">{{ mars_database.news_title }}</h3>
                     <p> {{ mars_database.news_parag }} </p>
+                    <hr class="my-4">
                 </div>
             </div>
         </div>
     </div>
-    <!-- Left Image -->
-    <div class="container">
+    <!-- Section 2: left and right -->
+    <div class="row">
+        <!-- Left Image -->
+
         <div class="col-lg-8 border">
             <h4>Featured Mars Image</h4>
-            <img src="{{ mars_database.featured_image_url }}" alt="Featured Mars Image">
+            <img src="{{ mars_database.featured_image_url }}" alt="Featured Mars Image" height=auto width=750px>
         </div>
         <!-- Table Mars Facts -->
         <br>
@@ -45,6 +48,7 @@
                 {{ mars_database.facts_df | safe }}
             </div>
         </div>
+
         <div class="row">
             <div class="col-md-12 offset-4">
                 <h4 class="align-items-center"><u>Mars Hemispheres</u></h4>
