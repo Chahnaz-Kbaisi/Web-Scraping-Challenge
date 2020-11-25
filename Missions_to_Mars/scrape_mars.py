@@ -2,8 +2,17 @@
 
 from splinter import Browser
 from bs4 import BeautifulSoup
+from flask import Flask, render_template, redirect
 from splinter.exceptions import ElementDoesNotExist
 import pandas as pd
+import requests
+from flask_pymongo import PyMongo
+import pymongo
+import time
+import io
+
+
+# import sys
 
 
 def scrape():
@@ -14,7 +23,11 @@ def scrape():
     # NASA Mars News:
     url = 'https://mars.nasa.gov/news/'
     browser.visit(url)
+    time.sleep(2)
     html = browser.html
+
+    # Starting Mars database dictionary for return all scrapped data:
+    mars_database = {}
 
     # Creating BeautifulSoup object from the webpage:
     soup = BeautifulSoup(html, 'html.parser')
@@ -27,14 +40,17 @@ def scrape():
     # JPL Mars Space Images - Featured Image
     image_url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
     browser.visit(image_url)
+    time.sleep(2)
 
     # For more informatiom go to:
     img_botton = browser.find_by_id('full_image')
     img_botton.click()
+    time.sleep(2)
 
     # For more information go to:
     img_url = browser.links.find_by_partial_text('more info')
     img_url.click()
+    time.sleep(2)
 
     html = browser.html
     # Creating BeautifulSoup object from the webpage:
@@ -52,28 +68,31 @@ def scrape():
     # Using splinter to view Mars Facts webpage:
     url_facts = 'https://space-facts.com/mars/'
     browser.visit(url_facts)
+    time.sleep(4)
     html = browser.html
 
     # Using pandas 'read_html' function to automatically scrape the data from the webpage:
     tables = pd.read_html(url_facts)
-
     # Using normal pandas indexing to slice off dataframes:
     facts_df = tables[0]
-
     # Renaming dataframe columns:
     facts_df.columns = ['Facts', 'Values']
-
     # Setting dataframe index:
-    mars_fact = facts_df.set_index('Facts', inplace=True)
-
+    facts_df.set_index('Facts', inplace=True)
+    print(facts_df)
+    print(type(facts_df))
     # Using Pandas to convert the data to a HTML table string:
-    mars_facts = facts_df.to_html('table.html')
+    str_io = io.StringIO()
+    facts_df.to_html(buf=str_io)
+    facts_html_str = str_io.getvalue()
+    #print(tables[0], file=sys.stderr)
 
     # Mars Hemispheres
 
     # The URL page to be scraped using splinter:
     url_hemispheres = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
     browser.visit(url_hemispheres)
+    time.sleep(2)
 
     html = browser.html
     # Creating BeautifulSoup object from the webpage:
@@ -95,33 +114,37 @@ def scrape():
     for item in items:
         # Locating & storing the titles:
         title = item.find("h3").text
-        # print(title)
 
         # Locating & storing the link
         img_link = item.find("a", class_="itemLink product-item")["href"]
-        # print(img_link)
 
         # Storing the url using browser:
         browser.visit(main_url + img_link)
+        time.sleep(2)
 
         # HTML object:
         img_link_html = browser.html
+        soup_obj = BeautifulSoup(img_link_html, "html.parser")
 
         # Collecting full image url:
-        img_url = main_url + soup_obj.find('img', class_='thumb')['src']
+        img_url = main_url + soup_obj.find('img', class_='wide-image')['src']
 
         hemispheres_urls_dict.append({"title": title, "img_url": img_url})
 
-        browser.quit()
+    browser.quit()
 
-        # Storing the dataset into dictionary:
+    # Storing the dataset into dictionary:
 
-        mars_database = {
-            "news_title": news_title,
-            "news_paragraph": news_parag,
-            "featured_image_url ":  featured_image_url,
-            "mars_facts": mars_facts,
-            "hemispheres_images_urls": hemispheres_urls_dict
-        }
+    mars_database = {
+        "news_title": news_title,
+        "news_parag": news_parag,
+        "featured_image_url":  featured_image_url,
+        "facts_df": facts_html_str,
+        "hemispheres_urls_dict": hemispheres_urls_dict
+    }
 
-        return mars_database
+    return mars_database
+
+
+if __name__ == '__main__':
+    scrape()
