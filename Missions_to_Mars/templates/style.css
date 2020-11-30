@@ -1,6 +1,6 @@
 /* Styleing Sheet */
 
-.head {
+head {
     height: 200px;
     padding-top: 20px;
 }
@@ -28,4 +28,4 @@ table {
     border-collapse: collapse;
     width: 100%;
     padding: 5%;
-  }
+}

@@ -41,42 +41,48 @@
                 <!-- </div> -->
             </div>
             <!-- Section 2: right - Table Mars Facts -->
-            <div class="col-md-4">
+            <div class="col-md-4" style="padding-top: 20px;">
                 <div class="boxborder">
                     <div class="panel-body">
                         <h5>Mars Facts</h5>
-                        <!-- <p> -->
-                        {{ mars_database.facts_df | safe }}
-                        <!-- </p> -->
+                        <table>
+                            {{ mars_database.facts_df | safe }}
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
         <hr>
-        <!-- Hemispheres section -->
-        <div class="row">
-            <div class="col-md-8 offset-4">
-                <h4 class="align-items-center"><b>Mars Hemispheres</b></h4>
+        <!-- Mars Hemispheres Section -->
+        <div class="container-fluid padding">
+            <div class="row wewlcome text-center">
+                <div class="col-12">
+                    <h4 class="align-items-center"><b>Mars Hemispheres</b></h4>
 
+                </div>
             </div>
         </div>
         </br>
-        <div class="row">
-            {% for hem in mars_database.hemispheres_urls_dict %}
-            <div class="col-6 border">
-                </br>
-                <div class="img-container">
-                    <img width="530px" height="530px" src=" {{ hem.img_url | safe }} ">
-                    <div class="caption">
-                        <h4> {{ hem.title }} </h4>
+        <div class="container-fluid padding">
+            <div class="row padding">
+                {% for hem in mars_database.hemispheres_urls_dict %}
+                <div class="col-md-6 border">
+                    </br>
+                    <div class="card text-center">
+                        <img class="card-img-top" src=" {{ hem.img_url | safe }} "
+                            style="max-width:100%; max-height: auto">
+                        <div class="card-body">
+                            <h4 class="card-title"> {{ hem.title }} </h4>
+                        </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
 
     </div>
     <hr>
+
 </body>
 <!-- jQuery and JS separate / Popper.js -->
 <script src=" https://code.jquery.com/jquery-3.5.1.slim.min.js"
