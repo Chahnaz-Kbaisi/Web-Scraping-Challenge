@@ -33,22 +33,26 @@
         </div>
 
         <!-- Section 2: left and right -->
-        <div class="row">
-            <!-- Section 1: Left - Image -->
-            <div class="col-md-8">
-                <!-- <div class="border"> -->
-                <h4><b>Featured Mars Image</b></h4>
-                <img src="{{ mars_database.featured_image_url }}" alt="Featured Mars Image" height=auto width=750px>
-                <!-- </div> -->
-            </div>
-            <!-- Section 2: right - Table Mars Facts -->
-            <div class="col-md-4" style="padding-top: 20px;">
-                <div class="boxborder">
-                    <div class="panel-body">
-                        <h5>Mars Facts</h5>
-                        <table>
-                            {{ mars_database.facts_df | safe }}
-                        </table>
+        <div class="container padding">
+            <div class="row padding">
+                <!-- Section 1: Left - Image -->
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <!-- <div class="border"> -->
+                    <h4><b>Featured Mars Image</b></h4>
+                    <img src="{{ mars_database.featured_image_url }}" alt="Featured Mars Image" class="img-fluid"
+                        style="max-width:100%; max-height: auto;">
+                    <!-- </div> -->
+                </div>
+                <!-- Section 2: right - Table Mars Facts -->
+
+                <div class="col-md-4" style="padding-top: 20px;">
+                    <div class="boxborder">
+                        <div class="panel-body">
+                            <h5>Mars Facts</h5>
+                            <table>
+                                {{ mars_database.facts_df | safe }}
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
