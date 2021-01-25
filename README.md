@@ -65,7 +65,7 @@ MongoDB with Flask templating was used to create a new HTML page that displayed 
 
 * The Jupyter notebook was converted into a Python script called `scrape_mars.py` with a function called `scrape` that executed all of the scraping code from above and return one Python dictionary containing all of the scraped data.
 
-* A route called `/scrape` that will import the `scrape_mars.py` script was created and called `scrape` function.
+* A route called `/scrape` that will import the `scrape_mars.py` [script](https://github.com/Chahnaz-Kbaisi/Web-Scraping-Mission-to-Mars/blob/main/Missions_to_Mars/scrape_mars.py) was created and called `scrape` function.
 
   * The return value was stored in Mongo as a Python dictionary.
 
